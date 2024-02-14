@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Try live video!</h1>
+<p>Here you can use your machine camera to try it in real-time.</p>
+<p><strong>Please note:</strong> You must have an account on Twilio before you can try this demo.
+    If you don't have one, you can create one using this <a href="https://login.twilio.com/u/signup?state=hKFo2SBDSm45NjBsdzQxZElvLXZCeVBQWUdxdE1wOFAxb0FMeaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIDNOblY0OEE4dFFxV1kzb0EzazBWYzdQbzRRSEc4b1lfo2NpZNkgTW05M1lTTDVSclpmNzdobUlKZFI3QktZYjZPOXV1cks">link</a>.
+    After creating an account, search for the console dashboard. Then scroll down to get your Account SID and Auth Token.
+    Enter this information, and finally, you will be able to try the demo!</p>
+
+<!-- Display Twilio form -->
+<form method="POST" action="{{ url_for('video_feed') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.account_id.label(class="form-control-label") }}
+        {{ form.account_id(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.auth_token.label(class="form-control-label") }}
+        {{ form.auth_token(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.to_number.label(class="form-control-label") }}
+        {{ form.to_number(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+<!-- Display video feed -->
+<img src="/video_feed" width="640" height="480" alt="Video feed">
+
+
+{% endblock %}

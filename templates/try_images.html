@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Try a free demo on images here!</h1>
+<p>Please note: This is a free demo, which does not contain all options or features and may not have optimal accuracy.</p>
+<p>In this page you will try my fire detection model, you can upload your own image and try on it.</p>
+<p>In images, you will just try the detection part. If you want to try the whatsapp part too, you have to go to the next page "Try on video".</p>
+
+<!-- Add image upload form with custom styling -->
+<form action="/try-images" method="post" enctype="multipart/form-data" class="image-upload-form">
+    <label for="file-upload" class="custom-file-upload">Choose File</label>
+    <input id="file-upload" type="file" name="file">
+    <button type="submit" class="custom-detect-button">Detect Fire</button>
+</form>
+
+<!-- Display the uploaded image -->
+<div id="image-container">
+    {% if img_base64 %}
+        <img src="data:image/png;base64,{{ img_base64 }}" alt="Uploaded Image">
+    {% endif %}
+</div>
+
+<!-- Display detection result -->
+<div id="result-container">
+    {% if result %}
+        <p>Fire detected!</p>
+    {% else %}
+        <p>No fire detected</p>
+    {% endif %}
+</div>
+
+{% endblock %}

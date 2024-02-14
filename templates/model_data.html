@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Model and Data</h1>
+<p> <strong>Fire Detection Model</strong> </p>
+<p>The fire detection model is built using state-of-the-art machine learning techniques to accurately identify and classify instances of fire in video streams. Here's an overview of the key components of our model</p>
+
+<h2>Architecture:</h2>
+<p>The model utilizes a You Only Look Once(YOLO) architecture, which is well-suited for detection tasks.</p>
+
+<h2>Training Data:</h2>
+<p>I trained the model on a free dataset of images containing both fire and non-fire scenes. You can use another data if you want.
+                But in case you want to get the data which I used, <a href="https://universe.roboflow.com/-jwzpw/continuous_fire/dataset/6">here</a> </p>
+
+<h2>Training Process:</h2>
+<p>The model was trained on Kaggle website to take benefits of the free gpu. Feel free to use any platform you want, It doesn`t matter.</p>
+
+<h2>Accuracy and Performance:</h2>
+<p>The model was trained on 80 epochs only.The score of mAP50 is 0.90 and score of mAP50-95 is 0.663. I think if I trained it on more epochs it will give a better accuracy.</p>
+
+<h2>Whatsapp message Part:</h2>
+<p>In order to send the message via whatsapp I used twilio library. It`s free, all you need is to create an account on the website and get your account information like account id and auth token.</p>
+
+<h2>Visualizations:</h2>
+<p>Here is a select box contains different plots from the model, So you can see how the model performing</p>
+
+<!-- Image Selector -->
+<label for="imageSelect">Select an image:</label>
+<select id="imageSelect" style="padding: 10px; border-radius: 5px; background-color: #f2f2f2; border: 1px solid #ccc;">
+    <option value="{{ url_for('static', filename='confusion_matrix.png') }}">Confusion Matrix</option>
+    <option value="{{ url_for('static', filename='confusion_matrix_normalized.png') }}">Normalized Confusion Matrix</option>
+    <option value="{{ url_for('static', filename='F1_curve.png') }}">F1 Curve</option>
+    <option value="{{ url_for('static', filename='P_curve.png') }}">Precision Curve</option>
+    <option value="{{ url_for('static', filename='R_curve.png') }}">Recall Curve</option>
+    <option value="{{ url_for('static', filename='PR_curve.png') }}">Precision-Recall Curve</option>
+    <option value="{{ url_for('static', filename='results.png') }}">Results</option>
+</select>
+<br>
+<img id="selectedImage" src="" alt="Selected Image" style="max-width: 100%; height: auto;">
+
+<script>
+    // JavaScript to handle image selection and display
+    const imageSelect = document.getElementById('imageSelect');
+    const selectedImage = document.getElementById('selectedImage');
+
+    imageSelect.addEventListener('change', function() {
+        const selectedValue = imageSelect.value;
+        selectedImage.src = selectedValue;
+    });
+</script>
+
+{% endblock %}
